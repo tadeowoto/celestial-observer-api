@@ -39,5 +39,18 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable Long id) {
+        Optional<Post> post = postService.findByPostId(id);
+
+        if (post.isPresent()) {
+            postService.deletePost(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Error: El post con ID " + id + " no existe.");
+        }
+    }
+
 
 }
