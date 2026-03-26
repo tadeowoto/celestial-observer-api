@@ -40,4 +40,7 @@ public class Post {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "userId", nullable = false)
+    private Long userId;
+
 }
