@@ -54,7 +54,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(Post post, Long userId) {
+    public Post createPost(Post post) {
        return postRepository.save(post);
-    } // esto lo tengo que revisar mas tarde
+    }
 }

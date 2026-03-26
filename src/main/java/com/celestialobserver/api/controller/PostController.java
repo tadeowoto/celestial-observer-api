@@ -3,11 +3,10 @@ package com.celestialobserver.api.controller;
 import com.celestialobserver.api.entity.Post;
 import com.celestialobserver.api.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +24,13 @@ public class PostController {
         return ResponseEntity.ok(postService.findByPostId(id));
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<?> createPost(@RequestBody Post p){
+        Post newPost = postService.createPost(p);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(newPost);
+
+    }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<List<Post>> getPostByUserId(@PathVariable long id){
